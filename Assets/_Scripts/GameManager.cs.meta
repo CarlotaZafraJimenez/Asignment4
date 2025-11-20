@@ -3,7 +3,9 @@ guid: 488ea11f34fa916419ffd68da8a776e2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - PauseMenu: {fileID: 2920920598786967450, guid: 0d825fefc573d854c8c80afb07ceaa7c, type: 3}
+  - LevelCompleteScreen: {fileID: 7898726249555081705, guid: f621a61224a10f845aaea945936ad983, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject PauseMenu;
+    public GameObject LevelCompleteScreen;
 
     public static int Lives = 5;
     public static int Score = 0;
@@ -15,7 +16,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         PauseMenu.SetActive(false);
-        _paused = false;
+        LevelCompleteScreen.SetActive(false);
+        StartGame ();
     }
 
     // Update is called once per frame
@@ -47,5 +49,12 @@ public class GameManager : MonoBehaviour
         {
             _gameOver = true;
         }
+    }
+    public static void StartGame() 
+    {
+        Score = 0;
+        Lives = 5;
+        _gameOver = false;
+        _paused = false;
     }
 }
