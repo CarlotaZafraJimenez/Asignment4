@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private const float gravity = 2.0f;
+    public float bumpforce = 25.0f;
 
     // Improvements to consider:
     // - Double jump
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        if (GameManager._gameOver) return;
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = gravity;
     }
@@ -42,6 +44,32 @@ public class PlayerMovement : MonoBehaviour
         }
 
  
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Enemy"))
+        { 
+            GameManager.SubtractLife();
+
+            Vector2 myCenter = transform.position;
+            Vector2 contactPoint = collision.GetContact(0).point;
+
+            myCenter.y = contactPoint.y;
+            Vector2 forceVector = myCenter - contactPoint;
+            forceVector.y += 1.0f;
+
+            rb.AddForce(forceVector * bumpforce, ForceMode2D.Impulse);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            GameManager.Score += 100;
+            Destroy(collision.gameObject);
+        }
     }
 
     private bool IsGrounded()

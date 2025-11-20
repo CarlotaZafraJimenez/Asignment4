@@ -6,7 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public GameObject PauseMenu;
 
+    public static int Lives = 5;
+    public static int Score = 0;
+
     public static bool _paused;
+    public static bool _gameOver = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +35,17 @@ public class GameManager : MonoBehaviour
                 PauseMenu.SetActive(false);
                 _paused = false;
             }
+        }
+    }
+
+    public static void SubtractLife()
+    {
+        Lives--;
+
+        Debug.Log($"Lives remaining: " + Lives);
+        if (Lives <= 0)
+        {
+            _gameOver = true;
         }
     }
 }
